@@ -2,8 +2,6 @@ from django.shortcuts import render_to_response, render, HttpResponse
 from django.core.context_processors import csrf
 from django.contrib.auth.decorators import login_required
 from authentico.models import User
-from .forms import GorevEkle, MusteriEkle, ProjeEkle
-from .models import Gorev, Musteri, Proje
 import feedparser
 # import xlrd, unicodedata'
 # import pandas as pd
