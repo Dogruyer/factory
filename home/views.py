@@ -257,6 +257,7 @@ def patrecete(request):
     return render(request, "factory/patrecete.html", c)
 
 
+# done 17.12.2018 - 11:40
 def uretimrecete(request):
     if request.POST:
         # siparis_no = sipno["entries"][5].values()[0]
@@ -281,6 +282,7 @@ def uretimrecete(request):
     return render(request, "factory/uretimrecete.html", c)
 
 
+# done 17.12.2018 - 11:41
 def recetedesen(request):
     if request.POST:
         # siparis_no = sipno["entries"][2].values()[0]
@@ -305,6 +307,7 @@ def recetedesen(request):
     return render(request, "factory/recetedesen.html", c)
 
 
+# done 17.12.2018 - 11:41
 def girisfiyatlar(request):
     if request.POST:
         partino = request.POST["partino"]
@@ -326,3 +329,52 @@ def girisfiyatlar(request):
     c.update(csrf(request))
 
     return render(request, "factory/girisfiyatlar.html", c)
+
+
+def kart_operasyon_maliyet(request):
+    if request.POST:
+        sipno = request.POST["sipno"]
+        sipno = sipno.replace("/", "-")
+
+        get_recete_no = feedparser.parse("http://demo.7houseburger.com/UretimRecete/SipNo/" + sipno)
+
+        if get_recete_no['entries'][0].values()[0]:
+            recete_no = get_recete_no['entries'][0].values()[0]
+            tarih = get_recete_no['entries'][1].values()[0]
+
+            yil = tarih.split('.')[2].split(' ')[0]
+            ay = tarih.split('.')[1]
+            gun = tarih.split('.')[0]
+
+        get_recete_icerik = feedparser.parse("http://demo.7houseburger.com/Recete/ReceteNo/" + recete_no)
+
+        for i in range(0, len(get_recete_icerik['entries'])):
+            if i % 2 == 0:
+                base64_malzeme_adi = base64.b64encode(get_recete_icerik['entries'][i].values()[0])
+                recetedeki_deger = base64.b64encode(get_recete_icerik['entries'][i+1].values()[0])
+
+                go_to_malzeme = feedparser.parse("http://demo.7houseburger.com/Stok/Adi/"
+                                                 + base64_malzeme_adi + '/'
+                                                 + str(ay) + '-' + str(gun) + '-' + str(yil))
+
+                stok = go_to_malzeme['entries'][0].values()[0]
+                toplam_giren = feedparser.parse("http://demo.7houseburger.com/StokToplamGiren/Adi/" + base64_malzeme_adi + '/'
+                                                + str(ay)
+                                                + '-'
+                                                + str(gun)
+                                                + '-'
+                                                + str(yil))
+
+                total_stok = stok['entries'][0].values()[0]
+                total_stok = float(str(total_stok))
+                total_depo = toplam_giren['entries'][0].values()[0]
+
+    c = {"request": request}
+    c.update(csrf(request))
+
+    return render(request, "factory/girisfiyatlar.html", c)
+
+
+def test(request):
+    c = {"request": request}
+    return render(request, "tablo.html", c)
