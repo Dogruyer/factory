@@ -1,0 +1,130 @@
+print "toplamgiren - stok : " + toplam_giren_sayisi + " - " + stok
+
+for i in range(0, len(get_recete_icerik['entries'])):
+    ...:     if i % 2 == 0:
+    ...:         base64_malzeme_adi = base64.b64encode(get_recete_icerik['entries'][i].values()[0])
+    ...:         recetedeki_deger = base64.b64encode(get_recete_icerik['entries'][i+1].values()[0])
+    ...:         go_to_malzeme = feedparser.parse("http://demo.7houseburger.com/Stok/Adi/"+ base64_malzeme_adi + '/'+ str(ay) + '-' + s
+    ...: tr(gun) + '-' + str(yil))
+    ...:         stok = go_to_malzeme['entries'][0].values()[0]
+    ...:         toplam_giren = feedparser.parse("http://demo.7houseburger.com/StokToplamGiren/Adi/" + base64_malzeme_adi + '/'+ str(ay
+    ...: ) + '-' + str(gun) + '-' + str(yil))
+    ...:         toplam_giren_sayisi = toplam_giren['entries'][0].values()[0]
+    ...:         string_giren = str(toplam_giren_sayisi)
+    ...:         #print "string giren: " + string_giren
+    ...:         #print "float giren: " + float(string_giren)
+    ...:         #print "int giren: " + int(string_giren)
+    ...:         #print "string stok: " + string_stok
+    ...:         #print "float stok: " + float(string_stok)
+    ...:         if ',' in string_giren:
+    ...:             string_giren = string_giren.replace(',', '.')
+    ...:         print string_giren
+
+
+MalzemeHareketi/Adi/{encodingType}
+PatRecete/Pat/{isim}
+
+http://demo.7houseburger.com/UretimRecete/SipNo/18-33438
+http://demo.7houseburger.com/ReceteDesen/SipNo/c
+http://demo.7houseburger.com/GirisFiyatlar/PartiNo/BAL-306605
+
+Giris/PartiNo/{id}
+GMMTablo/SipNo/{id}
+Ops/SipNo/{id}
+Planlar/SipNo/{id}
+Prg/SipNo/{id}
+SiparisFoyu/SipNo/{id}
+
+Recete/ReceteNo/{sorgu}
+StokGiren/Adi/{sayi}/{encodingType}/{tarih}
+DesenDigital/SipNo/id
+
+Stok/Adi/ÜrünAdi/Ay-Gün-Yıl
+
+Genel/tabloAdi/KolonAdi/girilenDeger
+
+Encode ve Decode Yapılacak Tablo ve Kolonlar :
+                  TABLO                KOLON
+               	  dbo_Malzeme Hareketi  : Adı          : Base64
+                  dbo_Ops 		: Operasyon    : Base64
+                  Giriş             	: Kumaş Çeşidi : Base64
+                  Reçete            	: Adı          : Base64
+                  Stoklar           	: Adı          : Base64 
+                  PAT_RECETE        	: AD , PAT     : Base64
+                 
+
+Sipariş No ile Aratılacak Tablolar için
+
+Replace("-","/") Yapılacak .. Örn : SipNo -> Url'e 15-2321 gidecek . Sorguya 15/231
+
+Parti No ile Aratılacak Değerler için
+
+Replace("-","/") Yapılacak .. Url'e 15-2321 gidecek . Sorguya 15/231
+
+
+Tarihlerle ilgili Sorgularda ............
+
+# AY / GÜN / YIL # formatında -> Url'e 02-15-2018 Sorguya #02/15/2018# şeklinde gidecek
+
+
+PARAMETRELİ SORGU LİNKLERİ YENİ : 
+
+1-> DesenDigitalParametre/{kolon}/{deger}
+    GirisFiyatlarParametre/{kolon}/{deger}
+    GirisParametre/{kolon}/{deger}
+    GMMTabloParametre/{kolon}/{deger}
+    MalzemeHareketiParametre/{kolon}/{deger}
+    OpsParametre/{kolon}/{deger}
+    PatReceteParametre/{kolon}/{deger}
+    PlanlarParametre/{kolon}/{deger}
+    PrgParametre/{kolon}/{deger}
+    ReceteDesenParametre/{kolon}/{deger}
+    ReceteParametre/{kolon}/{deger}
+    SiparisFoyuParametre/{kolon}/{deger}
+    UretimReceteParametre/{kolon}/{deger}
+
+
+
+
+for i in range(0,24):
+     ...:     if i%2 == 0:
+     ...:         if li[i]                                             
+     ...:         dict.update({li[i].values()[0]: li[i+1].values()[0]})
+
+
+
+
+
+
+
+
+
+
+
+{% for i in result_array %}
+                                                {% for key,value in i.items %}
+                                                    {% if counter > 7 %}
+
+                                                    {% else %}
+                                                        <th style="text-align: center;">{{ key }}</th>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endfor %}
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            {% for i in result_array %}
+                                                {% for key,value in i.items %}
+                                                    {% if counter|divisibleby:6 %}
+                                                        </tr>
+                                                        <tr>
+                                                    {% endif %}
+                                                    {% if value %}
+                                                        <td style="text-align: center;">{{ value }}</td>
+                                                    {% else %}
+                                                        <td style="text-align: center;">-</td>
+                                                    {% endif %}
+                                                {% endfor %}
+                                            {% endfor %}
+
