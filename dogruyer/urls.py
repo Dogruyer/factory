@@ -5,7 +5,39 @@ from django.conf import settings
 # from django.contrib import admin
 # admin.autodiscover()
 
+'''
+    Url List:
+    
+    * planlar 
+        - /planlar -> url: Planlar/SipNo/{id}
+    * giris
+        - /giris -> url: Giris/PartiNo/{id}
+    * patrecete
+        - /patrecete -> url: PatRecete/Pat/{pat-adi}
+    * uretimrecete
+        - /uretimrecete -> url: UretimRecete/SipNo/{id}
+    * recetedesen
+        - /recetedesen -> url: ReceteDesen/SipNo/{id}
+    * girisfiyatlar
+        - /girisfiyatlar -> url: /GirisFiyatlar/PartiNo/BAL-306605
+    * gmm
+        - /gmm-> url: GMMTablo/SipNo/{id}
+    * hammadde
+        - /hammadde -> url:
+                        - SiparisFoyu/SipNo/
+                        - GirisFiyatlar/PartiNo/
+    * malzeme
+        - /malzeme -> url: MalzemeHareketi/Adi/
+    * ops
+        - /ops -> url: Ops/SipNo/
+    * prg
+        - /prg -> url: Prg/SipNo/
+    * siparisfoyu
+        - /siparisfoyu -> SiparisFoyu/SipNo/
+'''
+
 urlpatterns = patterns('',
+
                        url(r'^$',
                            'home.views.planlar',
                            name='planlarhome'),
@@ -58,44 +90,21 @@ urlpatterns = patterns('',
                            'home.views.siparisfoyu',
                            name='siparisfoyu'),
 
-                       # url(r'^$',
-                       #     'home.views.home',
-                       #     name='home'),
-                       # # url(r'^login$',
-                       #     'authentico.views.login',
-                       #     name='login'),
-                       #
-                       # url(r'^register$',
-                       #     'authentico.views.register',
-                       #     name='register'),
-                       #
-                       # url(r'^logout$',
-                       #     'authentico.views.logout',
-                       #     name='logout'),
-                       #
-                       # url(r'^test$',
-                       #     'home.views.test',
-                       #     name='test'),
-                       #
-                       # url(r'^sorgu$',
-                       #     'home.views.sorgu',
-                       #     name='sorgu'),
-                       #
-                       # url(r'^proje/ekle$',
-                       #     'home.views.projeekle',
-                       #     name='projeekle'),
-                       #
-                       # url(r'^musteri/ekle$',
-                       #     'home.views.musteriekle',
-                       #     name='musteriekle'),
-                       #
-                       # url(r'^gorev/ekle$',
-                       #     'home.views.gorevekle',
-                       #     name='gorevekle'),
-                       #
-                       # url(r'^duzenle/(?P<username>\w+)',
-                       #     'home.views.duzenle_kullanici',
-                       #      name='duzenle_kullanici'),
+                       url(r'^test$',
+                           'home.views.test',
+                           name='test'),
+
+                       url(r'^login$',
+                           'authentico.views.login',
+                           name='login'),
+
+                       url(r'^register$',
+                           'authentico.views.register',
+                           name='register'),
+
+                       url(r'^logout$',
+                           'authentico.views.logout',
+                           name='logout'),
 
                        )
 
