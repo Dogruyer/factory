@@ -333,6 +333,8 @@ def girisfiyatlar(request):
 
 def kart_operasyon_maliyet(request):
     if request.POST:
+        # üretim recete ile baslayan maliyet
+
         sipno = request.POST["sipno"]
         sipno = sipno.replace("/", "-")
 
@@ -351,23 +353,49 @@ def kart_operasyon_maliyet(request):
         for i in range(0, len(get_recete_icerik['entries'])):
             if i % 2 == 0:
                 base64_malzeme_adi = base64.b64encode(get_recete_icerik['entries'][i].values()[0])
-                recetedeki_deger = base64.b64encode(get_recete_icerik['entries'][i+1].values()[0])
+                recetedeki_deger = get_recete_icerik['entries'][i+1].values()[0]
 
                 go_to_malzeme = feedparser.parse("http://demo.7houseburger.com/Stok/Adi/"
                                                  + base64_malzeme_adi + '/'
                                                  + str(ay) + '-' + str(gun) + '-' + str(yil))
 
                 stok = go_to_malzeme['entries'][0].values()[0]
-                toplam_giren = feedparser.parse("http://demo.7houseburger.com/StokToplamGiren/Adi/" + base64_malzeme_adi + '/'
+
+                toplam_giren = feedparser.parse("http://demo.7houseburger.com/StokToplamGiren/Adi/" + base64_malzeme_adi
+                                                + '/'
                                                 + str(ay)
                                                 + '-'
                                                 + str(gun)
                                                 + '-'
                                                 + str(yil))
 
-                total_stok = stok['entries'][0].values()[0]
-                total_stok = float(str(total_stok))
                 total_depo = toplam_giren['entries'][0].values()[0]
+
+                if ',' in total_depo:
+                    float_total_depo = float((str(total_depo)).replace(',', '.'))
+                else:
+                    float_total_depo = float(total_depo)
+                if ',' in stok:
+                    float_stok = float((str(stok)).replace(',', '.'))
+                else:
+                    float_stok = float(stok)
+
+                fark = float_total_depo - float_stok
+
+                for j in range(0, 1000):
+                    get_recete_icerik = feedparser.parse("http://demo.7houseburger.com/StokGiren/Adi/" + j
+                                                         + '/'
+                                                         + base64_malzeme_adi
+                                                         + '/'
+                                                         + str(ay)
+                                                         + '-'
+                                                         + str(gun)
+                                                         + '-'
+                                                         + str(yil))
+                    if j == 1:
+                        get_recete_icerik['entries'][0].values()[0]
+                    else:
+                        get_recete_icerik['entries'][(len(get_recete_icerik['entries']) - 1)].values()[0]
 
     c = {"request": request}
     c.update(csrf(request))
