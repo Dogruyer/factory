@@ -381,8 +381,9 @@ def kart_operasyon_maliyet(request):
                     float_stok = float(stok)
 
                 fark = float_total_depo - float_stok
+                toplam = 0
 
-                for j in range(0, 1000):
+                for j in range(1, 1000):
                     get_recete_icerik = feedparser.parse("http://demo.7houseburger.com/StokGiren/Adi/" + j
                                                          + '/'
                                                          + base64_malzeme_adi
@@ -393,9 +394,57 @@ def kart_operasyon_maliyet(request):
                                                          + '-'
                                                          + str(yil))
                     if j == 1:
-                        get_recete_icerik['entries'][0].values()[0]
+                        toplam = toplam + float(get_recete_icerik['entries'][0].values()[0])
                     else:
-                        get_recete_icerik['entries'][(len(get_recete_icerik['entries']) - 1)].values()[0]
+                        toplam = toplam + float(get_recete_icerik['entries'][(len(get_recete_icerik['entries']) - 1)].values()[0])
+
+                    if toplam > stok:
+                        sorgu_adimi = j
+                        break
+
+                tarih_sorgusu = feedparser.parse("http://demo.7houseburger.com/StokTarih/" + sorgu_adimi
+                                                 + '/'
+                                                 + base64_malzeme_adi
+                                                 + '/'
+                                                 + str(ay)
+                                                 + '-'
+                                                 + str(gun)
+                                                 + '-'
+                                                 + str(yil))
+                if sorgu_adimi == 1:
+                    tiger_tarih = get_recete_icerik['entries'][0].values()[0]
+                else:
+                    tiger_tarih = get_recete_icerik['entries'][(len(get_recete_icerik['entries']) - 1)].values()[0]
+
+                dovizcinsi_sorgusu = feedparser.parse("http://demo.7houseburger.com/StokDoviz/" + sorgu_adimi
+                                                      + '/'
+                                                      + base64_malzeme_adi
+                                                      + '/'
+                                                      + str(ay)
+                                                      + '-'
+                                                      + str(gun)
+                                                      + '-'
+                                                      + str(yil))
+
+                if sorgu_adimi == 1:
+                    tiger_doviz = get_recete_icerik['entries'][0].values()[0]
+                else:
+                    tiger_doviz = get_recete_icerik['entries'][(len(get_recete_icerik['entries']) - 1)].values()[0]
+
+                birim_sorgusu = feedparser.parse("http://demo.7houseburger.com/StokBirimFiyat/" + sorgu_adimi
+                                                 + '/'
+                                                 + base64_malzeme_adi
+                                                 + '/'
+                                                 + str(ay)
+                                                 + '-'
+                                                 + str(gun)
+                                                 + '-'
+                                                 + str(yil))
+
+                if sorgu_adimi == 1:
+                    tiger_birim = get_recete_icerik['entries'][0].values()[0]
+                else:
+                    tiger_birim = get_recete_icerik['entries'][(len(get_recete_icerik['entries']) - 1)].values()[0]
 
     c = {"request": request}
     c.update(csrf(request))
