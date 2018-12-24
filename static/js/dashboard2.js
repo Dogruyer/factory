@@ -111,8 +111,6 @@ $(document).ready(function () {
             value: 105
         }],
         resize: true,
-        backgroundColor: '#353c48',
-        labelColor: '#96a2b4',
         colors: ['#ff7676', '#2cabe3', '#53e69d', '#7bcef3']
     });
 

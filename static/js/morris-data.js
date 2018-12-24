@@ -44,13 +44,12 @@ Morris.Area({
         labels: ['iPhone', 'iPad', 'iPod Touch'],
         pointSize: 3,
         fillOpacity: 0,
-        pointStrokeColors:['#00bfc7', '#fb9678', '#9675ce'],
+        pointStrokeColors:['#00bfc7', '#fdc006', '#9675ce'],
         behaveLikeLine: true,
-        gridLineColor: 'rgba(120, 130, 140, 0.28)',
-        lineWidth: 2,
-        gridTextColor: '#96a2b4',
+        gridLineColor: '#e0e0e0',
+        lineWidth: 1,
         hideHover: 'auto',
-        lineColors: ['#00bfc7', '#fb9678', '#9675ce'],
+        lineColors: ['#00bfc7', '#fdc006', '#9675ce'],
         resize: true
         
     });
@@ -99,14 +98,13 @@ Morris.Area({
         labels: ['Site A', 'Site B'],
         pointSize: 0,
         fillOpacity: 0.4,
-        pointStrokeColors:['#5e6d88', '#01c0c8'],
+        pointStrokeColors:['#b4becb', '#01c0c8'],
         behaveLikeLine: true,
-        gridLineColor: 'rgba(120, 130, 140, 0.28)',
+        gridLineColor: '#e0e0e0',
         lineWidth: 0,
         smooth: false,
-        gridTextColor: '#96a2b4',
         hideHover: 'auto',
-        lineColors: ['#5e6d88', '#01c0c8'],
+        lineColors: ['#b4becb', '#01c0c8'],
         resize: true
         
     });
@@ -131,10 +129,9 @@ Morris.Area({
           xkey: 'y',
           ykeys: ['item1'],
           labels: ['Item 1'],
-          gridLineColor: 'rgba(120, 130, 140, 0.28)',
+          gridLineColor: '#eef0f2',
           lineColors: ['#a3a4a9'],
           lineWidth: 1,
-          gridTextColor: '#96a2b4',
           hideHover: 'auto'
         });
  // Morris donut chart
@@ -153,8 +150,6 @@ Morris.Area({
             value: 20
         }],
         resize: true,
-        backgroundColor: '#353c48',
-        labelColor: '#96a2b4',
         colors:['#99d683', '#13dafe', '#6164c1']
     });
 
@@ -202,8 +197,7 @@ Morris.Area({
         labels: ['A', 'B', 'C'],
         barColors:['#b8edf0', '#b4c1d7', '#fcc9ba'],
         hideHover: 'auto',
-        gridLineColor: 'rgba(120, 130, 140, 0.28)',
-        gridTextColor:'#96a2b4',
+        gridLineColor: '#eef0f2',
         resize: true
     });
 // Extra chart
@@ -257,8 +251,7 @@ Morris.Area({
                 resize:true,
                 fillOpacity: 0.8,
                 behaveLikeLine: true,
-                gridLineColor: 'rgba(120, 130, 140, 0.28)',
-                 gridTextColor:'#96a2b4',
+                gridLineColor: '#e0e0e0',
                 hideHover: 'auto'
         
     });
