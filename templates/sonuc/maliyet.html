@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ STATIC_URL }}/plugins/images/favicon.png">
+    <title>Ample Admin Template - The Ultimate Multipurpose admin template</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="{{ STATIC_URL }}/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Menu CSS -->
+    <link href="{{ STATIC_URL }}/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.css" rel="stylesheet">
+    <!-- animation CSS -->
+    <link href="{{ STATIC_URL }}/css/animate.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="{{ STATIC_URL }}/css/style.css" rel="stylesheet">
+    <!-- color CSS -->
+    <link href="{{ STATIC_URL }}/css/colors/blue-dark.css" id="theme" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+<![endif]-->
+</head>
+
+<body class="fix-header">
+<div class="preloader">
+    <svg class="circular" viewBox="25 25 50 50">
+        <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+    </svg>
+</div>
+<div id="wrapper">
+
+    <nav class="navbar navbar-default navbar-static-top m-b-0">
+        <div class="navbar-header" style="background: #e1252e;">
+            <div class="top-left-part">
+                <!-- Logo -->
+                <a class="logo" href="/">
+
+                    </b><img width="150px;" height="50px;" src="{{ STATIC_URL }}/oztek.png" alt="home"
+                             class="dark-logo"/>
+                </a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav slimscrollsidebar">
+            <div class="sidebar-head">
+                <h3><span class="fa-fw open-close"><i class="ti-menu hidden-xs"></i><i class="ti-close visible-xs"></i></span>
+                    <span class="hide-menu">Menu</span></h3></div>
+            <ul class="nav" id="side-menu">
+                <li class="user-pro">
+                    <a href="#" class="waves-effect"><img src="{{ STATIC_URL }}/plugins/images/users/varun.jpg"
+                                                          alt="user-img" class="img-circle"> <span
+                            class="hide-menu"> {{ request.user }}</span>
+                    </a>
+                    <ul class="nav nav-second-level collapse" aria-expanded="false" style="height: 0px;">
+                    </ul>
+                </li>
+                <li><a href="/" class="waves-effect active"><i class="mdi mdi-chart-bar fa-fw"></i> <span
+                        class="hide-menu">Tablolar<span class="fa arrow"></span></span></a>
+                    <ul class="nav nav-second-level">
+                        <li><a href="/giris"><i class="fa-fw">G</i><span class="hide-menu">Giriş</span></a></li>
+                        <li><a href="/patrecete"><i class="fa-fw">P</i><span class="hide-menu">Pat Reçete</span></a>
+                        </li>
+                        <li><a href="/uretimrecete"><i class="fa-fw">Ü</i><span
+                                class="hide-menu">Üretim Reçete</span></a></li>
+                        <li><a href="/recetedesen"><i class="fa-fw">R</i><span class="hide-menu">Reçete Desen</span></a>
+                        </li>
+                        <li><a href="/girisfiyatlar"><i class="fa-fw">G</i><span class="hide-menu">Giriş Fiyatlar</span></a>
+                        </li>
+                        <li><a href="/gmm"><i class="fa-fw">G</i><span class="hide-menu">GMM</span></a></li>
+                        <li><a href="/hammadde"><i class="fa-fw">H</i><span class="hide-menu">Hammadde</span></a></li>
+                        <li><a href="/malzeme"><i class="fa-fw">M</i><span class="hide-menu">Malzeme</span></a></li>
+                        <li><a href="/ops"><i class="fa-fw">O</i><span class="hide-menu">Ops</span></a></li>
+                        <li><a href="/planlar"><i class="fa-fw">P</i><span class="hide-menu">Planlar</span></a></li>
+                        <li><a href="/prg"><i class="fa-fw">P</i><span class="hide-menu">Prg</span></a></li>
+                        <li><a href="/siparisfoyu"><i class="fa-fw">S</i><span class="hide-menu">Sipariş Föyu</span></a>
+                        </li>
+                    </ul>
+                </li>
+                <li><a href="/logout" class="waves-effect"><i class="mdi mdi-logout fa-fw"></i> <span class="hide-menu">Log out</span></a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="page-wrapper">
+        <div class="container-fluid">
+            <br/>
+
+            <div class="row">
+                <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="white-box">
+                        <h3 class="box-title">OPERASYONEL İŞLEMLER
+
+                        </h3>
+                        <div class="row sales-report">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h2>Sipariş No: {{ sipno }} </h2>
+                                <p>TARİH</p>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6 ">
+                                <h1 class="text-right text-success m-t-20"> - </h1></div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    {% for i in result_array_ops %}
+                                        {% for key,value in i.items %}
+                                            {% if forloop.parentloop.counter0 > 2 %}
+
+                                            {% else %}
+                                                <th style="text-align: center;">{{ key }}</th>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    {% for i in result_array_ops %}
+                                        {% for key,value in i.items %}
+                                            {% if forloop.parentloop.counter0 == 0 %}
+                                                <td style="text-align: center;">{{ value }}</td>
+                                            {% else %}
+                                                {% if forloop.parentloop.counter0|divisibleby:3 %}
+                                                    </tr>
+                                                    <tr>
+                                                {% endif %}
+                                                {% if value %}
+                                                    <td style="text-align: center;">{{ value }}</td>
+                                                {% else %}
+                                                    <td style="text-align: center;">-</td>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            <div class="col-md-4 col-lg-4 col-sm-12">
+                    <div class="white-box">
+                        <h3 class="box-title">Operasyon - Zaman - Personel - Makine
+
+                        </h3>
+                        <div class="row sales-report">
+                            <div class="col-md-6 col-sm-6 col-xs-6">
+                                <h2>Sipariş No: {{ sipno }} </h2>
+                                <p>TARİH</p>
+                            </div>
+                            <div class="col-md-6 col-sm-6 col-xs-6 ">
+                                <h1 class="text-right text-success m-t-20"> - </h1></div>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                <tr>
+                                    {% for i in result_array_gmm %}
+                                        {% for key,value in i.items %}
+                                            {% if forloop.parentloop.counter0 > 14 %}
+
+                                            {% else %}
+                                                <th style="text-align: center;">{{ key }}</th>
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    {% for i in result_array_gmm %}
+                                        {% for key,value in i.items %}
+                                            {% if forloop.parentloop.counter0 == 0 %}
+                                                <td style="text-align: center;">{{ value }}</td>
+                                            {% else %}
+                                                {% if forloop.parentloop.counter0|divisibleby:15 %}
+                                                    </tr>
+                                                    <tr>
+                                                {% endif %}
+                                                {% if value %}
+                                                    <td style="text-align: center;">{{ value }}</td>
+                                                {% else %}
+                                                    <td style="text-align: center;">-</td>
+                                                {% endif %}
+                                            {% endif %}
+                                        {% endfor %}
+                                    {% endfor %}
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{##}
+{#    <!-- /.container-fluid -->#}
+{#    <footer class="footer text-center">#}
+{#        2018 &copy; DOĞRUYER</footer>#}
+</div>
+<!-- ============================================================== -->
+<!-- End Page Content -->
+<!-- ============================================================== -->
+</div>
+<!-- /#wrapper -->
+<!-- jQuery -->
+<script src="{{ STATIC_URL }}/plugins/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap Core JavaScript -->
+<script src="{{ STATIC_URL }}/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Menu Plugin JavaScript -->
+<script src="{{ STATIC_URL }}/plugins/bower_components/sidebar-nav/dist/sidebar-nav.min.js"></script>
+<!--slimscroll JavaScript -->
+<script src="{{ STATIC_URL }}/js/jquery.slimscroll.js"></script>
+<!--Wave Effects -->
+<script src="{{ STATIC_URL }}/js/waves.js"></script>
+<!-- Custom Theme JavaScript -->
+<script src="{{ STATIC_URL }}/js/custom.min.js"></script>
+<!--Style Switcher -->
+<script src="{{ STATIC_URL }}/plugins/bower_components/styleswitcher/jQuery.style.switcher.js"></script>
+
+<script src="{{ STATIC_URL }}/plugins/bower_components/knob/jquery.knob.js"></script>
+
+</body>
+
+</html>
