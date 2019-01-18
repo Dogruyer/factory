@@ -5,7 +5,7 @@ from authentico.models import User
 import feedparser
 import xlrd, unicodedata, itertools, functools, base64
 # import pandas as pd
-
+from .models import Maliyet
 
 # done 30.11.2018 - 11:45 Cuma
 def planlar(request):
@@ -333,7 +333,6 @@ def girisfiyatlar(request):
 
 def kart_operasyon_maliyet(request):
     if request.POST:
-        # üretim recete ile baslayan maliyet
 
         sipno = request.POST["sipno"]
         sipno = sipno.replace("/", "-")
@@ -455,3 +454,63 @@ def kart_operasyon_maliyet(request):
 def test(request):
     c = {"request": request}
     return render(request, "tablo.html", c)
+
+
+def yeni(request):
+    # sipno = request.POST["sipno"]
+    # siparisno = sipno.replace("/", "-")
+
+    sipno = "18-42898"
+
+    opsquery = feedparser.parse("http://demo.7houseburger.com/Ops/SipNo/" + str(sipno))
+    result_array_ops = opsquery["entries"]
+
+    gmmquery = feedparser.parse("http://demo.7houseburger.com/GMMTablo/SipNo/" + str(sipno))
+    result_array_gmm = gmmquery["entries"]
+
+    c = {"request": request,
+         "sipno": sipno,
+         "result_array_ops": result_array_ops,
+         "result_array_gmm": result_array_gmm}
+
+    c.update(csrf(request))
+    return render(request, "sonuc/maliyet.html", c)
+
+
+def genel(request):
+    c = {"request": request}
+    c.update(csrf(request))
+
+    return render(request, "sonuc/genel.html", c)
+
+
+def genel_sorgu(request):
+    if request.POST:
+        yeni_sorgu = Maliyet()
+
+        siparis_no = request.POST["sipno"]
+        siparis_no = siparis_no.replace("/", "-")
+
+        if Maliyet.objects.filter(sipno=siparis_no):
+            nesne = Maliyet.objects.get(sipno=siparis_no)
+
+            c = {"request": request,
+                 "yeni": nesne}
+
+            c.update(csrf(request))
+
+            return render(request, "sonuc/genel.html", c)
+
+        else:
+            yeni_sorgu.sipno = siparis_no
+            yeni_sorgu.save()
+
+            c = {"request": request,
+                 "yeni": yeni}
+
+            return render(request, "sonuc/genel.html")
+
+    c = {"request": request}
+    c.update(csrf(request))
+
+    return render(request, "factory/sorgu.html", c)

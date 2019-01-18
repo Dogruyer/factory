@@ -42,6 +42,14 @@ urlpatterns = patterns('',
                            'home.views.planlar',
                            name='planlarhome'),
 
+                       url(r'^yeni$',
+                           'home.views.yeni',
+                           name='yeni'),
+
+                       url(r'^genel$',
+                           'home.views.genel_sorgu',
+                           name='genel_sorgu'),
+
                        url(r'^giris$',
                            'home.views.giris',
                            name='giris'),
