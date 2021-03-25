@@ -49,7 +49,7 @@ pypyodbc==1.3.4
 pyserial==2.6
 python-dateutil==2.7.5
 pytz==2014.4
-PyYAML==3.10
+PyYAML==5.4
 redis==2.10.2
 requestbuilder==0.1.0b1
 requests==2.2.1
