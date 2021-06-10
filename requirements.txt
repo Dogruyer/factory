@@ -9,7 +9,7 @@ Cheetah==2.4.4
 colorama==0.2.5
 configobj==4.7.2
 decorator==4.0.10
-Django==1.4.8
+Django==2.2.24
 django-celery==3.1.10
 django-extensions==2.1.2
 django-jchart==0.4.2
