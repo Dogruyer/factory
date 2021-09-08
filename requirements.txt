@@ -35,7 +35,7 @@ pathlib2==2.1.0
 pbr==1.10.0
 pexpect==4.2.1
 pickleshare==0.7.4
-Pillow==3.3.1
+Pillow==8.3.2
 pip-tools==0.3.5
 plac==1.0.0
 poster==0.8.1
