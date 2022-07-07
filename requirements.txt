@@ -52,7 +52,7 @@ pytz==2014.4
 PyYAML==3.10
 redis==2.10.2
 requestbuilder==0.1.0b1
-requests==2.2.1
+requests==2.20.0
 scandir==1.9.0
 scikit-image==0.10.1
 simplegeneric==0.8.1
